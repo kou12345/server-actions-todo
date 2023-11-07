@@ -1,5 +1,5 @@
 import { Todo } from "@/types/types";
-import { asc, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import "server-only";
 import { db } from "../db";
 import { todos } from "../db/schema";
@@ -11,7 +11,7 @@ export const getTodoList = async () => {
       .select()
       .from(todos)
       .where(eq(todos.isDone, false))
-      .orderBy(asc(todos.createdAt));
+      .orderBy(desc(todos.createdAt));
 
     const todoList: Todo[] = [];
 
