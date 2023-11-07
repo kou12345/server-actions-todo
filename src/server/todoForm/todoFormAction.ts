@@ -1,6 +1,7 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 import { db } from "../db/index";
 import { todos } from "../db/schema";
 
@@ -27,4 +28,5 @@ export async function todoFormAction(formData: FormData) {
   } catch (error) {
     console.log(error);
   }
+  redirect("/");
 }
