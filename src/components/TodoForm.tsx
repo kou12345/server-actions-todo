@@ -1,29 +1,41 @@
-"use server";
+"use client";
 
 import { todoFormAction } from "@/server/todoForm/todoFormAction";
+import { useFormState, useFormStatus } from "react-dom";
 
-export const TodoForm = async () => {
+const initialState = {
+  message: null,
+};
+
+export const TodoForm = () => {
   console.log("TodoForm");
 
+  const { pending } = useFormStatus();
+  const [state, formAction] = useFormState(todoFormAction, initialState);
+
+  console.log("state", state);
+
   return (
-    <div>
-      <div>TodoForm</div>
-      <form action={todoFormAction}>
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Task</span>
-          </label>
-          <input
-            type="text"
-            name="title"
-            placeholder="Type here"
-            className="input input-bordered w-full max-w-xs"
-            required
-          />
+    <div className="mb-6">
+      <div>New Task</div>
+      <form action={formAction}>
+        <div className="flex items-end w-full">
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Title</span>
+            </label>
+            <input
+              type="text"
+              name="title"
+              placeholder="Type here"
+              className="input input-bordered w-full"
+              required
+            />
+          </div>
+          <button className="btn btn-primary mx-4" type="submit" disabled={pending}>
+            Submit
+          </button>
         </div>
-        <button className="btn btn-primary" type="submit">
-          Submit
-        </button>
       </form>
     </div>
   );

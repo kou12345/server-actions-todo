@@ -1,11 +1,11 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { db } from "../db/index";
 import { todos } from "../db/schema";
 
-export async function todoFormAction(formData: FormData) {
+export async function todoFormAction(prevState: any, formData: FormData) {
   console.log("todoFormAction");
 
   const title = formData.get("title");
@@ -25,8 +25,10 @@ export async function todoFormAction(formData: FormData) {
     });
 
     console.log("result", result);
+    return revalidatePath("/");
   } catch (error) {
-    console.log(error);
+    if (error instanceof Error) {
+      return { message: error.message };
+    }
   }
-  redirect("/");
 }

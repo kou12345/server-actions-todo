@@ -14,8 +14,11 @@ export const TodoListItem = (props: Props) => {
     <div className="mt-6">
       <div className="card w-96 bg-neutral text-neutral-content">
         <div className="card-body items-center text-center">
-          <h2 className="card-title">{props.todo.title}</h2>
-          <p>We are using cookies for no reason.</p>
+          <div className="w-4/5">
+            <h2 className="card-title text-ellipsis overflow-hidden">{props.todo.title}</h2>
+          </div>
+
+          <p>作成日時：{props.todo.created_at.toLocaleString("ja-JP")}</p>
           <div className="card-actions justify-end">
             <form action={doneActionWithId}>
               <button className="btn btn-accent">Done</button>
