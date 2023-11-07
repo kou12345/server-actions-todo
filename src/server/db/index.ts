@@ -1,13 +1,12 @@
-import { createClient } from "@libsql/client";
-import * as dotenv from "dotenv";
-import { drizzle } from "drizzle-orm/libsql";
-// import "server-only";
+import { neon, neonConfig } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
+import "server-only";
+import * as schema from "./schema";
 
-dotenv.config();
+console.log("db");
 
-const client = createClient({
-  url: process.env.TURSO_DB_URL!,
-  authToken: process.env.TURSO_DB_AUTH_TOKEN!,
-});
+neonConfig.fetchConnectionCache = true;
 
-export const db = drizzle(client);
+const sql = neon(process.env.DATABASE_URL as string);
+
+export const db = drizzle(sql, { schema });

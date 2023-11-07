@@ -1,13 +1,13 @@
-import "server-only";
+// import "server-only";
 
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { boolean, pgTable, serial, text } from "drizzle-orm/pg-core";
 
-export const todos = sqliteTable("todos", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+export const todos = pgTable("todos", {
+  id: serial("id").primaryKey(),
   user_id: text("user_id").notNull(),
   title: text("title").notNull(),
-  is_done: integer("is_done", { mode: "boolean" }).notNull().default(false),
+  is_done: boolean("is_done").notNull().default(false),
   created_at: text("created_at")
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`),
