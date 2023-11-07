@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { db } from "../db";
 import { todos } from "../db/schema";
 
-export async function doneAction(id: number, formData: FormData) {
+export async function doneAction(id: string, formData: FormData) {
   console.log("doneAction");
   console.log("id", id);
 
@@ -13,7 +13,7 @@ export async function doneAction(id: number, formData: FormData) {
     const result = await db
       .update(todos)
       .set({
-        is_done: true,
+        isDone: true,
       })
       .where(eq(todos.id, id));
 

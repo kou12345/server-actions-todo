@@ -10,8 +10,8 @@ export const getTodoList = async () => {
     const result = await db
       .select()
       .from(todos)
-      .where(eq(todos.is_done, false))
-      .orderBy(asc(todos.created_at));
+      .where(eq(todos.isDone, false))
+      .orderBy(asc(todos.createdAt));
 
     const todoList: Todo[] = [];
 
@@ -19,10 +19,10 @@ export const getTodoList = async () => {
       todoList.push({
         id: todo.id,
         title: todo.title,
-        user_id: todo.user_id,
-        is_done: todo.is_done,
-        created_at: new Date(todo.created_at),
-        updated_at: new Date(todo.updated_at),
+        user_id: todo.userId,
+        is_done: todo.isDone,
+        created_at: new Date(todo.createdAt),
+        updated_at: new Date(todo.updatedAt),
       } as Todo);
     });
 

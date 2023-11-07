@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { db } from "../db";
 import { todos } from "../db/schema";
 
-export async function deleteAction(id: number, formData: FormData) {
+export async function deleteAction(id: string, formData: FormData) {
   console.log("deleteAction");
   console.log("id", id);
 

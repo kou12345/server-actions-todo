@@ -20,7 +20,7 @@ export async function todoFormAction(prevState: any, formData: FormData) {
     if (user === null) throw new Error("user is null");
 
     const result = await db.insert(todos).values({
-      user_id: user.id as string,
+      userId: user.id as string,
       title: title as string,
     });
 
