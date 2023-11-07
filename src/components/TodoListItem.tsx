@@ -1,3 +1,4 @@
+import { deleteAction } from "@/server/todoListItem/deleteAction";
 import { doneAction } from "@/server/todoListItem/doneAction";
 import { Todo } from "@/types/types";
 import Link from "next/link";
@@ -8,6 +9,7 @@ type Props = {
 
 export const TodoListItem = (props: Props) => {
   const doneActionWithId = doneAction.bind(null, props.todo.id);
+  const deleteActionWithId = deleteAction.bind(null, props.todo.id);
   return (
     <div className="mt-6">
       <div className="card w-96 bg-neutral text-neutral-content">
@@ -18,9 +20,9 @@ export const TodoListItem = (props: Props) => {
             <form action={doneActionWithId}>
               <button className="btn btn-accent">Done</button>
             </form>
-            <Link href={`${props.todo.id}`} className="btn btn-secondary">
-              Delete
-            </Link>
+            <form action={deleteActionWithId}>
+              <button className="btn btn-secondary">Delete</button>
+            </form>
             <Link href={`${props.todo.id}`} className="btn btn-primary">
               Detail
             </Link>
