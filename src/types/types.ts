@@ -6,3 +6,12 @@ export type Todo = {
   created_at: Date;
   updated_at: Date;
 };
+
+export type Comment = {
+  id: string;
+  todoId: string;
+  userId: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
