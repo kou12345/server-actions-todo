@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "5af4533d-68f2-4bde-ae86-68a0e00b5ab0",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "47fa6f06-bb3e-46ef-a724-a4ce8e0d1c6a",
+  "prevId": "5af4533d-68f2-4bde-ae86-68a0e00b5ab0",
   "tables": {
     "comments": {
       "name": "comments",
@@ -10,9 +10,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "user_id": {
           "name": "user_id",

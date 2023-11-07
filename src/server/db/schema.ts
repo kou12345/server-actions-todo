@@ -1,17 +1,43 @@
 // import "server-only";
 
-import { sql } from "drizzle-orm";
-import { boolean, pgTable, serial, text } from "drizzle-orm/pg-core";
+import { relations, sql } from "drizzle-orm";
+import { boolean, pgTable, text, uuid } from "drizzle-orm/pg-core";
 
 export const todos = pgTable("todos", {
-  id: serial("id").primaryKey(),
-  user_id: text("user_id").notNull(),
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull(),
   title: text("title").notNull(),
-  is_done: boolean("is_done").notNull().default(false),
-  created_at: text("created_at")
+  isDone: boolean("is_done").notNull().default(false),
+  createdAt: text("created_at")
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`),
-  updated_at: text("updated_at")
+  updatedAt: text("updated_at")
     .notNull()
     .default(sql`CURRENT_TIMESTAMP`),
 });
+
+export const todosRelations = relations(todos, ({ many }) => ({
+  comments: many(comments),
+}));
+
+export const comments = pgTable("comments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id").notNull(),
+  todoId: uuid("todo_id")
+    .notNull()
+    .references(() => todos.id),
+  content: text("content").notNull(),
+  createdAt: text("created_at")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at")
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+});
+
+export const commentsRelations = relations(comments, ({ one }) => ({
+  todos: one(todos, {
+    fields: [comments.todoId],
+    references: [todos.id],
+  }),
+}));
