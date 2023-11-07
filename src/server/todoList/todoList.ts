@@ -1,4 +1,5 @@
 import { Todo } from "@/types/types";
+import { eq } from "drizzle-orm";
 import "server-only";
 import { db } from "../db";
 import { todos } from "../db/schema";
@@ -6,7 +7,7 @@ import { todos } from "../db/schema";
 export const getTodoList = async () => {
   console.log("getTodoList");
   try {
-    const result = await db.select().from(todos);
+    const result = await db.select().from(todos).where(eq(todos.is_done, false));
 
     const todoList: Todo[] = [];
 
