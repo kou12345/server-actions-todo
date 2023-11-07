@@ -2,8 +2,8 @@ import { UserButton } from "@clerk/nextjs";
 
 export const Navbar = () => {
   return (
-    <div>
-      <div className="navbar bg-base-100">
+    <div className="mb-4">
+      <div className="navbar bg-base-100 my-2">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">Todo</a>
         </div>
@@ -20,6 +20,7 @@ export const Navbar = () => {
           </div>
         </div>
       </div>
+      <hr />
     </div>
   );
 };
