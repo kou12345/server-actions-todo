@@ -1,10 +1,13 @@
+import { doneAction } from "@/server/todoListItem/doneAction";
 import { Todo } from "@/types/types";
+import Link from "next/link";
 
 type Props = {
   todo: Todo;
 };
 
 export const TodoListItem = (props: Props) => {
+  const doneActionWithId = doneAction.bind(null, props.todo.id);
   return (
     <div className="mt-6">
       <div className="card w-96 bg-neutral text-neutral-content">
@@ -12,7 +15,15 @@ export const TodoListItem = (props: Props) => {
           <h2 className="card-title">{props.todo.title}</h2>
           <p>We are using cookies for no reason.</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Accept</button>
+            <form action={doneActionWithId}>
+              <button className="btn btn-accent">Done</button>
+            </form>
+            <Link href={`${props.todo.id}`} className="btn btn-secondary">
+              Delete
+            </Link>
+            <Link href={`${props.todo.id}`} className="btn btn-primary">
+              Detail
+            </Link>
           </div>
         </div>
       </div>
