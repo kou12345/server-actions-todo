@@ -7,19 +7,20 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "schema:gen": "drizzle-kit generate:sqlite --out src/server/db/migrations --schema src/server/db/schema.ts",
-    "schema:migrate": "ts-node -P src/server/db/db.tsconfig.json src/server/db/migrate"
+    "generate": "drizzle-kit generate:pg",
+    "push": "drizzle-kit push:pg"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.26.2",
     "@clerk/themes": "^1.7.9",
-    "@libsql/client": "^0.3.6",
+    "@neondatabase/serverless": "^0.6.0",
     "dotenv": "^16.3.1",
     "drizzle-orm": "^0.28.6",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "tsx": "^3.14.0"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -31,6 +32,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
     "postcss": "^8",
+    "postgres": "^3.4.3",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.1",
     "typescript": "^5"
